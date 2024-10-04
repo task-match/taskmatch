@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Posting Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            max-width: 480px;
+            margin: 0 auto;
+            padding: 0 8px;
+        }
+        @media (min-width: 768px) {
+            body {
+                padding: 0 24px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <header class="py-10 text-center bg-white">
+        <h1 class="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Post a <mark class="px-2 text-white bg-blue-600 rounded dark:bg-blue-500">Job</mark> </h1>
+        <h6 class="text-sm text-gray-500 dark:text-gray-400">Post your job now and start receiving applications today</h6>
+    </header>
+
+    <hr class="my-1 border-gray-300"> 
+    <!-- Gray divider -->
+
+    <main class="py-6 px-4 bg-white shadow-lg">
+        <form>
+            <div class="grid gap-6 mb-6 md:grid-cols-1">
+                <div>
+                    <label for="job_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Title</label>
+                    <input type="text" id="job_title" name="job_title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="amala and egusi soup" required />
+                </div>
+                <div>
+                    <label for="job_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Description</label>
+                    <textarea id="job_description" name="job_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe the responsibilities and requirements" required></textarea>
+                </div>
+                <div>
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        <input type="text" id="location" name="location" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ilorin, kwara" required />
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">For better results, consider posting jobs within your city. This helps attract local talent and ensures a smoother hiring process.</p>
+                </div>  
+                <div>
+                    <label for="price_range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price Range</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-dollar-sign"></i>
+                        </span>
+                        <input type="text" id="price_range" name="price_range" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" 500 - 30,000 Naira" required />
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">Please enter a price range you are genuinely willing to pay. This will attract qualified candidates who are a good fit for your budget.</p>
+                </div>
+                <div>
+                    <label for="job_category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Category</label>
+                    <input type="text" id="job_category" name="job_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" kitchen, outdoor" required />
+                </div>
+                <div class="max-w-[8rem]">
+                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Duration:</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-clock"></i> 
+                        </span>
+                        <input type="time" id="time" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="00:00" max="24:00" value="00:00" required />
+                    </div>
+                    <p class="text-sm text-gray-500 dark:text-gray-400">How long do you want the job to be visible on our website?</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="w-full sm:w-40 px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Post Job</button>
+                <a href="jobs.html" class="w-full sm:w-40 px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ml-4">Back to Jobs</a>
+            </div>
+        </form>
+    </main>
+
+    
+</body>
+  </html>
