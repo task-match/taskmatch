@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .font-bold-custom {
+            font-weight: 700;
+        }
+        .font-normal-custom {
+            font-weight: 400;
+        }
+        .text-red-600 {
+            color: #E02424; /* color.red 600 */
+        }
+        .text-2xl {
+            font-size: 1.5rem; /* Tailwind's text-2xl */
+        }
+        .text-gray-500 {
+            color: #737373; /* Tailwind's text-gray-500 */
+        }
+        .sticky {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+      
+              /* New styles for centering and mobile dimensions */
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        header, main, .fixed.bottom-0 {
+            width: 100%;
+            max-width: 400px; /* Standard mobile width */
+        }
+
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .max-w-sm {
+            width: 100%;
+        }
+    </style>
+</head>
+  
+<body>
+<header class="bg-gray-50 border-b border-gray-100 sticky" style="height: 4rem;">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
+        <div class="flex items-center flex-grow md:flex-grow-0">
+            <!-- Search Engine-->
+            <div class="relative w-full md:w-auto mr-3 ml-3">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-gray-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path></svg>
+                </div>
+                <input type="text" id="search-navbar" name="search-navbar" class="block w-full p-2 pl-10 text-gray-900 border border-gray-300 rounded-lg bg-white sm:text-sm focus:ring-blue-500 focus:border-blue-500" placeholder="Search jobs">
+            </div>
+            <!-- Post Job Button -->
+            <button type="button" id="post-job-button" name="post-job-button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center whitespace-nowrap ml-3 mr-3">Post Job</button>
+        </div>
+    </div>
+</header>
+
+<!-- Main Content -->
+<main class="w-full overflow-y-auto p-4 mb-14">
+    <!-- Job Listing 1 -->
+    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700">
+        <div class="flex justify-between items-center mb-5">
+            <h6 class="text-gray-500 dark:text-gray-400 mb-0">
+                <span class="text-gray-500 font-semibold text-xs">Time left:</span>
+                <span id="countdown1" name="countdown1" class=" font-semibold text-red-700 text-lg"></span>
+            </h6>
+            <span class="text-gray-500 dark:text-gray-400 text-xl mb-0"><i class="fas fa-bell"></i></span>
+        </div>
+        <h5 id="description1" name="description1" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">I am craving Amala, Egusi soup and four big meats.</h5>
+        <div class="flex flex-col items-start mb-1">
+            <p id="username1" name="username1" class="text-sm text-gray-700 dark:text-white mb-1">Bidemi sola</p>
+            <p id="location1" name="location1" class="text-xs text-gray-500 dark:text-white mb-2">ilorin city</p>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="priceRange1" name="priceRange1" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦4,000 - ₦5,500</span>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="paymentMethod1" name="paymentMethod1" class="bg-gray-100 text-gray-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Opay, Palmpay</span>
+        </div>
+        <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs mt-2 mb-2">
+          <i class="bi bi-people-fill mr-1"></i>
+          <a href="bidderlist.html" id="bidders1" name="bidders1" class="text-gray-500 dark:text-gray-400 text-xs ml-1">0 bidders</a>
+          <i class="fa fa-check-circle text-gray-500 ml-4"></i>
+          <span id="bidStatus1" name="bidStatus1" class="text-gray-500 dark:text-gray-400 text-xs ml-1">Bid not yet placed</span>
+        </div>
+        </div>
+
+    <!-- Job Listing 2 -->
+    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700 mt-4">
+        <div class="flex justify-between items-center mb-5">
+            <h6 class="text-gray-500 dark:text-gray-400 mb-0">
+                <span class="text-gray-500 font-semibold text-xs">Time left:</span>
+                <span id="countdown2" name="countdown2" class="font-semibold text-red-600 text-lg"></span>
+            </h6>
+            <span class="text-gray-500 dark:text-gray-400 text-xl mb-0"><i class="fas fa-bell"></i></span>
+        </div>
+        <h5 id="description2" name="description2" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">I need someone willing to wash 5 blazer suits and 7 Agbada</h5>
+        <div class="flex flex-col items-start mb-1">
+            <p id="username2" name="username2" class="text-sm text-gray-700 dark:text-white mb-1">chuku adamu</p>
+            <p id="location2" name="location2" class="text-xs text-gray-500 dark:text-white mb-2">Onitsha city</p>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="priceRange2" name="priceRange2" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦500 - ₦1,500</span>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="paymentMethod2" name="paymentMethod2" class="bg-gray-100 text-gray-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Opay, Bank transfer</span>
+        </div>
+        <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs mt-2 mb-2">
+          <i class="bi bi-people-fill mr-1"></i>
+          <a href="bidderlist.html" id="bidders2" name="bidders2" class="text-gray-500 dark:text-gray-400 text-xs ml-1">0 bidders</a>
+          <i class="fa fa-check-circle text-blue-500 ml-4"></i>
+          <span id="bidStatus2" name="bidStatus2" class="text-gray-500 dark:text-gray-400 text-xs ml-1">Bid placed</span>
+        </div>
+        </div>
+          
+          
+        <!-- Job Listing 3 -->
+    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700 mt-4">
+        <div class="flex justify-between items-center mb-5">
+            <h6 class="text-gray-500 dark:text-gray-400 mb-0">
+                <span class="text-gray-500 font-semibold text-xs">Time left:</span>
+                <span id="countdown3" name="countdown3" class="font-semibold text-red-600 text-lg"></span>
+            </h6>
+            <span class="text-gray-500 dark:text-gray-400 text-xl mb-0"><i class="fas fa-bell"></i></span>
+        </div>
+        <h5 id="description3" name="description3" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">I urgently need a team of 3 people to clean a wedding ceremony hall. The tasks include sweeping the hall and cleaning 950 chairs. </h5>
+        <div class="flex flex-col items-start mb-1">
+            <p id="username3" name="username3" class="text-sm text-gray-700 dark:text-white mb-1">Muhammad Obi</p>
+            <p id="location3" name="location3" class="text-xs text-gray-500 dark:text-white mb-2">Gwaripa city</p>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="priceRange3" name="priceRange3" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦1,300 - ₦9,500</span>
+        </div>
+        <div class="flex items-center mb-3">
+            <span id="paymentMethod3" name="paymentMethod3" class="bg-gray-100 text-gray-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Monie Point, Bank transfer</span>
+        </div>
+        <div class="flex items-center text-gray-500 dark:text-gray-400 text-xs mt-2 mb-2">
+          <i class="bi bi-people-fill mr-1"></i>
+          <a href="bidderlist.html" id="bidders3" name="bidders3" class="text-gray-500 dark:text-gray-400 text-xs ml-1">0 bidders</a>
+          <i class="fa fa-check-circle text-blue-500 ml-4"></i>
+          <span id="bidStatus3" name="bidStatus3" class="text-gray-500 dark:text-gray-400 text-xs ml-1">Bid placed</span>
+        </div>
+        </div>
+
+
+
+</main>
+
+ <!-- Bottom Navigation -->
+ <div class="fixed bottom-0 z-50 w-full max-w-[400px] bg-white border-t border-gray-200 dark:bg-gray-700 dark:border-gray-600">
+        <button data-tooltip-target="tooltip-jobs" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="jobsButton">
+            <i class="fa-solid fa-person-digging w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Jobs</span>
+        </button>
+        <div id="tooltip-jobs" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Jobs
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-services" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="servicesButton">
+            <i class="fa-solid fa-users w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Services</span>
+        </button>
+        <div id="tooltip-services" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Services
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-appointment" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="appointmentButton">
+            <i class="fa-solid fa-calendar-plus w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Appointment</span>
+        </button>
+        <div id="tooltip-appointment" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Appointment
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="profileButton">
+            <i class="fa-solid fa-user w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+        </button>
+        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Profile
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-message" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="messageButton">
+            <i class="fa-solid fa-message w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+            <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Message</span>
+        </button>
+        <div id="tooltip-message" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+            Message
+            <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('post-job-button').addEventListener('click', function() {
+        window.location.href = 'postjob.html';
+    });
+
+    // Countdown functionality
+    const countdownElements = [
+        { id: 'countdown1', timeLeft: 300 }, // 5 minutes in seconds
+        { id: 'countdown2', timeLeft: 600 }, // 10 minutes in seconds
+        { id: 'countdown3', timeLeft: 21600 }, // 6 hours in seconds
+    ];
+
+    countdownElements.forEach(element => {
+        const countdownElement = document.getElementById(element.id);
+        let timeLeft = element.timeLeft;
+
+        function updateCountdown() {
+            const hours = Math.floor(timeLeft / 3600);
+            const minutes = Math.floor((timeLeft % 3600) / 60);
+            const seconds = timeLeft % 60;
+
+            countdownElement.innerHTML = `
+                <span class="digital-7-font">${hours.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">hr</span>
+                <span class="digital-7-font">${minutes.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">min</span>
+                <span class="digital-7-font">${seconds.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">sec</span>
+            `;
+
+            timeLeft--;
+
+            if (timeLeft < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.innerHTML = '<span class="digital-7-font">00</span><span class="font-normal-custom">hr</span><span class="digital-7-font">00</span><span class="font-normal-custom">min</span><span class="digital-7-font">00</span><span class="font-normal-custom">sec</span>';
+            }
+        }
+
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    });
+
+    // For bottom navigation
+    function updateIconsAndRedirect(buttonId, redirectUrl) {
+        const button = document.getElementById(buttonId);
+        const icon = button.querySelector('i');
+        const label = button.querySelector('span');
+
+        button.addEventListener('click', () => {
+            window.location.href = redirectUrl;
+        });
+
+        // Check if we're on the page corresponding to this button
+        const isActive = window.location.pathname.endsWith(redirectUrl);
+
+        // Update the icon and label color based on the current page
+        if (isActive) {
+            icon.classList.remove('text-gray-400');
+            icon.classList.add('text-blue-600');
+            label.classList.remove('text-gray-500', 'dark:text-gray-400');
+            label.classList.add('text-blue-600');
+        } else {
+            icon.classList.remove('text-blue-600');
+            icon.classList.add('text-gray-400');
+            label.classList.remove('text-blue-600');
+            label.classList.add('text-gray-500', 'dark:text-gray-400');
+        }
+    }
+
+    // Update icons and set up redirects for each button
+    updateIconsAndRedirect('jobsButton', 'jobs.html');
+    updateIconsAndRedirect('servicesButton', 'services.html');
+    updateIconsAndRedirect('appointmentButton', 'appointment.html');
+    updateIconsAndRedirect('profileButton', 'profile.html');
+    updateIconsAndRedirect('messageButton', 'message.html');
+
+    // Redirect to jobdescription.html when job listings are clicked
+    document.querySelectorAll('.max-w-sm').forEach((jobListing, index) => {
+        jobListing.addEventListener('click', function(event) {
+            // Prevent redirection if the click is on bidStatus1 or bidStatus2
+            if (!event.target.closest('#bidStatus1, #bidStatus2')) {
+                window.location.href = 'jobdescription.html';
+            }
+        });
+    });
+
+    // Redirect to bidderlist.html when bidStatus1 or bidStatus2 are clicked
+    document.getElementById('bidStatus1').addEventListener('click', function(event) {
+        event.stopPropagation();
+        window.location.href = 'bidderlist.html';
+    });
+
+    document.getElementById('bidStatus2').addEventListener('click', function(event) {
+        event.stopPropagation();
+        window.location.href = 'bidderlist.html';
+    });
+
+    // Display tooltips on bidStatus1 and bidStatus2 at page load
+     document.addEventListener('DOMContentLoaded', function() {
+    const bidders1 = document.getElementById('bidders1');
+    const bidders2 = document.getElementById('bidders2');
+    const tooltip1 = document.getElementById('tooltip-bidders1');
+    const tooltip2 = document.getElementById('tooltip-bidders2');
+
+    function showTooltip(tooltip, anchor) {
+    tooltip.style.visibility = 'visible';
+    tooltip.style.opacity = '1';
+    const rect = anchor.getBoundingClientRect();
+    let left = rect.left + rect.width / 2 - tooltip.offsetWidth / 2;
+    let top = rect.top - tooltip.offsetHeight - 10;
+
+    // Ensure tooltip stays within the viewport
+    if (left < 0) left = 10; // Adjust left position if it goes off the left edge
+    if (left + tooltip.offsetWidth > window.innerWidth) left = window.innerWidth - tooltip.offsetWidth - 10; // Adjust left position if it goes off the right edge
+    if (top < 0) top = 10; // Adjust top position if it goes off the top edge
+
+    tooltip.style.left = `${left}px`;
+    tooltip.style.top = `${top}px`;
+    }
+
+    showTooltip(tooltip1, bidders1);
+    showTooltip(tooltip2, bidders2);
+
+    setTimeout(() => {
+        tooltip1.style.visibility = 'hidden';
+        tooltip1.style.opacity = '0';
+        tooltip2.style.visibility = 'hidden';
+        tooltip2.style.opacity = '0';
+        }, 7000);
+    });
+    
+    
+    
+    // Initialize bidders1 and bidders2 counters
+    let bidders1Count = 0;
+    let bidders2Count = 0;
+    let bidders3Count = 0;
+
+// Function to update bidders1 count
+function updateBidders1() {
+    if (bidders1Count < 10) {
+        bidders1Count++;
+        document.getElementById('bidders1').textContent = `${bidders1Count} bidders`;
+    }
+}
+
+// Function to update bidders2 count
+function updateBidders2() {
+    if (bidders2Count < 10) {
+        bidders2Count++;
+        document.getElementById('bidders2').textContent = `${bidders2Count} bidders`;
+    }
+}
+
+// Function to update bidders3 count
+function updateBidders3() {
+    if (bidders3Count < 40) {
+        bidders3Count++;
+        document.getElementById('bidders3').textContent = `${bidders3Count} bidders`;
+    }
+}
+
+
+
+
+// Start count-up for bidders1 every 10 seconds
+setInterval(updateBidders1, 10000);
+
+// Start count-up for bidders2 every 14 seconds
+setInterval(updateBidders2, 14000);
+
+// Start count-up for bidders3 every 17 seconds
+setInterval(updateBidders3, 17000);
+    
+    
+    
+</script>
+
+<!-- Tooltips for bidders1 and bidders2 -->
+<button data-tooltip-target="tooltip-bidders1" data-tooltip-trigger="hover" type="button" class="text-white bg-gray-50 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tooltip hover</button>
+<div id="tooltip-bidders1" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+  Click bidders to see users who applied to offer their services
+  <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
+
+<button data-tooltip-target="tooltip-bidders2" data-tooltip-trigger="hover" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Tooltip hover</button>
+<div id="tooltip-bidders2" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-xs font-medium text-white bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+  Click bidders to see users who applied to offer their services
+  <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
+
+</body>
+  </html>
