@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>message inbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.5/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <style>
+        .message-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            border-bottom: 1px solid #e5e7eb;
+            cursor: pointer;
+        }
+        .message-item:hover {
+            background-color: #f3f4f6;
+        }
+        .message-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+        .message-info {
+            flex-grow: 1;
+            min-width: 0;
+        }
+        .message-sender {
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+        .message-preview {
+            font-size: 0.875rem;
+            color: #6b7280;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .message-time {
+            font-size: 0.75rem;
+            color: #6b7280;
+            min-width: 60px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+  <!--email list -->
+    <div class="container mx-auto px-2 py-4 max-w-2xl">
+        <div class="bg-white rounded-lg shadow-md overflow-hidden">
+            <div class="message-item">
+                <img src="https://randomuser.me/api/portraits/men/1.jpg" alt="Avatar" class="message-avatar">
+                <div class="message-info">
+                    <div class="message-sender">Malik Suleiman</div>
+                    <div class="message-preview">Hello, I'm interested in your project. Can we discuss further?</div>
+                </div>
+                <div class="message-time">10:30 AM</div>
+            </div>
+            <div class="message-item">
+                <img src="https://randomuser.me/api/portraits/women/2.jpg" alt="Avatar" class="message-avatar">
+                <div class="message-info">
+                    <div class="message-sender">Amaka Amaka</div>
+                    <div class="message-preview">I've submitted my proposal for the web design project. Let me know if you need any changes.</div>
+                </div>
+                <div class="message-time">9:45 AM</div>
+            </div>
+            <div class="message-item">
+                <img src="https://randomuser.me/api/portraits/women/1.jpg" alt="Avatar" class="message-avatar">
+                <div class="message-info">
+                    <div class="message-sender">Sarah Chuku</div>
+                    <div class="message-preview">Thank you for considering my application. I'm available for a call anytime this week.</div>
+                </div>
+                <div class="message-time">Yesterday</div>
+            </div>
+            <div class="message-item">
+                <img src="https://randomuser.me/api/portraits/men/4.jpg" alt="Avatar" class="message-avatar">
+                <div class="message-info">
+                    <div class="message-sender">Peter Ugo</div>
+                    <div class="message-preview">I've completed the first phase of the project. Please review and provide feedback.</div>
+                </div>
+                <div class="message-time">Yesterday</div>
+            </div>
+            <div class="message-item">
+                <img src="https://randomuser.me/api/portraits/men/2.jpg" alt="Avatar" class="message-avatar">
+                <div class="message-info">
+                    <div class="message-sender">Kinsey Thomas</div>
+                    <div class="message-preview">Just wanted to follow up on our previous conversation about the mobile app development.</div>
+                </div>
+                <div class="message-time">Mon</div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!-- Bottom Navigation -->
+    <div class="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+      <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+        <button data-tooltip-target="tooltip-jobs" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="jobsButton">
+          <i class="fa-solid fa-person-digging w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Jobs</span>
+        </button>
+        <div id="tooltip-jobs" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Jobs
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-services" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="servicesButton">
+          <i class="fa-solid fa-users w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Services</span>
+        </button>
+        <div id="tooltip-services" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Services
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-appointment" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="appointmentButton">
+          <i class="fa-solid fa-calendar-plus w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Appointment</span>
+        </button>
+        <div id="tooltip-appointment" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Appointment
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="profileButton">
+          <i class="fa-solid fa-user w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+        </button>
+        <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Profile
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        <button data-tooltip-target="tooltip-message" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="messageButton">
+          <i class="fa-solid fa-message w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+          <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Message</span>
+        </button>
+        <div id="tooltip-message" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+          Message
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      //For bottom navigation 
+      function updateIconsAndRedirect(buttonId, redirectUrl) {
+        const button = document.getElementById(buttonId);
+        const icon = button.querySelector('i');
+        const label = button.querySelector('span');
+    
+        button.addEventListener('click', () => {
+          window.location.href = redirectUrl;
+        });
+    
+        // Check if we're on the page corresponding to this button
+        const isActive = window.location.pathname.endsWith(redirectUrl);
+    
+        // Update the icon and label color based on the current page
+        if (isActive) {
+          icon.classList.remove('text-gray-400');
+          icon.classList.add('text-blue-600');
+          label.classList.remove('text-gray-500', 'dark:text-gray-400');
+          label.classList.add('text-blue-600');
+        } else {
+          icon.classList.remove('text-blue-600');
+          icon.classList.add('text-gray-400');
+          label.classList.remove('text-blue-600');
+          label.classList.add('text-gray-500', 'dark:text-gray-400');
+        }
+      }
+    
+      // Update icons and set up redirects for each button
+      updateIconsAndRedirect('jobsButton', 'jobs.html');
+      updateIconsAndRedirect('servicesButton', 'services.html');
+      updateIconsAndRedirect('appointmentButton', 'appointment.html');
+      updateIconsAndRedirect('profileButton', 'profile.html');
+      updateIconsAndRedirect('messageButton', 'message.html');
+    </script>
+    
+    
+    
+    </body>
+    
+    </html>
