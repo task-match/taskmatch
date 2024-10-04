@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointment</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js'></script>
+    <style>
+        .selected-tab {
+            border-bottom: 4px solid blue;
+            color: blue;
+        }
+        .content-padding {
+            padding-bottom: 140px;
+        }
+        
+        body { 
+          max-width: 480px; 
+          margin: 0 auto; 
+          padding: 0 2px; 
+          
+        } 
+        @media 
+        (min-width: 768px) { 
+          body { padding: 0 24px; 
+          } 
+        }
+        
+        /* Calendar styles */
+        #calendar {
+          height: 60vh;
+        }
+        
+        
+        
+        
+.calendar-tab-content {
+   width: 100%;
+   max-width: none;
+   padding: 0;
+   display: flex;
+   flex-direction: column;
+   height: calc(100vh - 200px); /* Adjust this value based on your header/footer height */
+}
+
+#calendar-container {
+  
+    height: 60vh;
+    width: 100%;
+}
+
+
+#calendar .fc button {
+    font-size: 0.75rem;
+}
+
+#job-details {
+    height: 40vh;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+
+
+
+
+
+/* FullCalendar overrides */
+.calendar-tab-content .fc {
+    font-size: 0.875rem;
+}
+
+.calendar-tab-content .fc button {
+    font-size: 0.75rem;
+}
+
+.calendar-tab-content .fc .fc-toolbar-title {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.calendar-tab-content .fc .fc-button-primary {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+}
+
+.calendar-tab-content .fc .fc-button-primary:hover {
+    background-color: #2563eb;
+    border-color: #2563eb;
+}
+
+
+        
+      
+        
+        
+        .fc {
+          font-size: 0.875rem;
+        }
+        .fc button {
+          font-size: 0.75rem;
+        }
+        h2 {
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
+        .fc .fc-toolbar-title {
+          font-size: 0.875rem;
+          font-weight: 600;
+        }
+        .fc .fc-button-primary {
+          background-color: #3b82f6;
+          border-color: #3b82f6;
+        }
+        .fc .fc-button-primary:hover {
+          background-color: #2563eb;
+          border-color: #2563eb;
+        }
+        .job-item {
+          display: flex;
+          align-items: center;
+          padding: 10px 0;
+          border-bottom: 1px solid #e5e7eb;
+        }
+        .job-avatar {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+          background-color: #e5e7eb;
+          margin-right: 15px;
+          flex-shrink: 0;
+        }
+        .job-info {
+          flex-grow: 1;
+        }
+        .job-title {
+          font-size: 0.875rem;
+          font-weight: 800;
+          margin-bottom: 5px;
+        }
+        .job-description {
+          font-size: 0.875rem;
+          font-weight: 400;
+        }
+        .job-time {
+          font-size: 0.75rem;
+          color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+<div class="container mx-auto p-4 bg-white shadow-lg">
+    <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+        <ul class="flex flex-wrap justify-center -mb-px space-x-8">
+            <li class="me-2">
+                <a class="inline-block p-4 border-b-2 border-transparent rounded-t-lg selected-tab"
+                   id="schedule-tab">Schedule</a>
+            </li>
+            <li class="me-2">
+                <a class="inline-block p-4 border-b-2 border-transparent rounded-t-lg text-gray-600 border-gray-200"
+                   id="notification-tab">notification</a>
+            </li>
+            <li class="me-2">
+                <a class="inline-block p-4 border-b-2 border-transparent rounded-t-lg text-gray-600 border-gray-200"
+                   id="calendar-tab">Calendar</a>
+            </li>
+        </ul>
+    </div>
+
+
+    <div id="schedule" class="mt-6 content-padding">
+        <form id="book-appointment-form">
+            <div class="grid gap-6 mb-6 md:grid-cols-1">
+                <div>
+                    <label for="service_provider" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Service Provider</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-user"></i>
+                        </span>
+                        <input type="text" id="service_provider" name="service_provider" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter service provider" required />
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Please enter the name of the service provider.</p>
+                </div>
+                <div>
+                    <label for="job_title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Title</label>
+                    <input type="text" id="job_title" name="job_title" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="amala and egusi soup" required />
+                </div>
+                <div>
+                    <label for="job_description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Description</label>
+                    <textarea id="job_description" name="job_description" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Describe the responsibilities and requirements" required></textarea>
+                </div>
+                <div>
+                    <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </span>
+                        <input type="text" id="location" name="location" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="ilorin, kwara" required />
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">For better results, consider posting jobs within your city. This helps attract local talent and ensures a smoother hiring process.</p>
+                </div>
+                <div>
+                    <label for="price_range" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price Range</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-dollar-sign"></i>
+                        </span>
+                        <input type="text" id="price_range" name="price_range" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" 500 - 30,000 Naira" required />
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Please enter a price range you are genuinely willing to pay. This will attract qualified candidates who are a good fit for your budget.</p>
+                </div>
+                <div>
+                    <label for="job_category" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Category</label>
+                    <input type="text" id="job_category" name="job_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder=" kitchen, outdoor" required />
+                </div>
+                <div>
+                    <label for="datepicker" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Datepicker</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-calendar-alt"></i>
+                        </span>
+                        <input type="date" id="datepicker" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">Please select the date for the appointment.</p>
+                </div>
+                <div class="max-w-[8rem]">
+                    <label for="time" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Job Duration:</label>
+                    <div class="flex">
+                        <span class="inline-flex items-center px-3 text-sm text-gray-900 bg-gray-200 border border-e-0 border-gray-300 rounded-l-lg dark:bg-gray-600 dark:text-gray-400 dark:border-gray-600">
+                            <i class="fas fa-clock"></i>
+                        </span>
+                        <input type="time" id="time" class="rounded-none rounded-r-lg bg-gray-50 border border-gray-300 text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" min="00:00" max="24:00" value="00:00" required />
+                    </div>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">You could enter the time you want the service to be offered</p>
+                </div>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="w-full sm:w-40 px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Confirm</button>
+                <a href="jobs.html" class="w-full sm:w-40 px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:border-gray-600 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700 ml-4">Back to Jobs</a>
+            </div>
+        </form>
+    </div>
+    <div id="notification" class="hidden mt-6 content-padding">
+        <div class="relative w-full max-w-sm overflow-y-scroll bg-white border border-gray-100 rounded-lg dark:bg-gray-700 dark:border-gray-600 h-98">
+            <ul>
+                <li class="border-b border-gray-100 dark:border-gray-600">
+                    <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-3">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">EO</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-red-700 dark:text-gray-400">New alert <span class="font-medium text-gray-900 dark:text-white">Emma Ojo</span>: turned down your proposal</p>
+                            <span class="text-xs text-blue-600 dark:text-blue-500">a few moments ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="border-b border-gray-100 dark:border-gray-600">
+                    <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-3">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">KA</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><span class="font-medium text-gray-900 dark:text-white">Kayode Ade</span> and <span class="font-medium text-gray-900 dark:text-white">2 others</span> agreed to your proposals.</p>
+                            <span class="text-xs text-blue-600 dark:text-blue-500">14 hours ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="border-b border-gray-100 dark:border-gray-600">
+                    <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-3">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">CO</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><span class="font-medium text-gray-900 dark:text-white">Chris Okonkwo</span> and <span class="font-medium text-gray-900 dark:text-white">3 others</span> agreed to your proposals.</p>
+                            <span class="text-xs text-blue-600 dark:text-blue-500">2 days ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="border-b border-gray-100 dark:border-gray-600">
+                    <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-3">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">AA</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><span class="font-medium text-gray-900 dark:text-white">Ahmed Ahmed</span> turned down your proposal. </p>
+                            <span class="text-xs text-blue-600 dark:text-blue-500">4 days ago</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="flex items-start px-4 py-3 hover:bg-gray-50 dark:hover:bg-gray-800">
+                        <div class="relative inline-flex items-center justify-center w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 mr-3">
+                            <span class="font-medium text-gray-600 dark:text-gray-300">TA</span>
+                        </div>
+                        <div class="flex-1">
+                            <p class="text-sm text-gray-500 dark:text-gray-400"><span class="font-medium text-gray-900 dark:text-white">Tayo Ade</span> has agreed to your proposal. </p>
+                            <span class="text-xs text-blue-600 dark:text-blue-500">5 days ago</span>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    
+  <div id="calendar" class="mt-6 mb-32 content-padding calendar-tab-content">
+    <div id='calendar-container'></div>
+    <div id='job-details'>
+      <h2>Job Details</h2>
+      <p>Click on a job in the calendar to see details.</p>
+    </div>
+  </div>
+  
+    
+</div>
+
+<!-- Bottom Navigation -->
+ <div class="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+   <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+     <button data-tooltip-target="tooltip-jobs" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="jobsButton">
+       <i class="fa-solid fa-person-digging w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Jobs</span>
+     </button>
+     <div id="tooltip-jobs" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Jobs
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-services" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="servicesButton">
+       <i class="fa-solid fa-users w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Services</span>
+     </button>
+     <div id="tooltip-services" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Services
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-appointment" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="appointmentButton">
+       <i class="fa-solid fa-calendar-plus w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Appointment</span>
+     </button>
+     <div id="tooltip-appointment" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Appointment
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="profileButton">
+       <i class="fa-solid fa-user w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+     </button>
+     <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Profile
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-message" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="messageButton">
+       <i class="fa-solid fa-message w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Message</span>
+     </button>
+     <div id="tooltip-message" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Message
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+   </div>
+ </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+<script>
+    const scheduleTab = document.getElementById('schedule-tab');
+    const notificationTab = document.getElementById('notification-tab');
+    const calendarTab = document.getElementById('calendar-tab');
+    const scheduleContent = document.getElementById('schedule');
+    const notificationContent = document.getElementById('notification');
+    const calendarContent = document.getElementById('calendar');
+
+    function switchTab(tab, content) {
+        scheduleTab.classList.remove('selected-tab');
+        notificationTab.classList.remove('selected-tab');
+        calendarTab.classList.remove('selected-tab');
+        tab.classList.add('selected-tab');
+
+        scheduleContent.classList.add('hidden');
+        notificationContent.classList.add('hidden');
+        calendarContent.classList.add('hidden');
+        content.classList.remove('hidden');
+    }
+
+    scheduleTab.addEventListener('click', (event) => {
+        event.preventDefault();
+        switchTab(scheduleTab, scheduleContent);
+    });
+
+    notificationTab.addEventListener('click', (event) => {
+        event.preventDefault();
+        switchTab(notificationTab, notificationContent);
+    });
+
+    calendarTab.addEventListener('click', (event) => {
+    event.preventDefault();
+    switchTab(calendarTab, calendarContent);
+    if (!calendar) {
+        initializeCalendar();
+    }
+});
+function initializeCalendar() {
+    var calendarEl = document.getElementById('calendar-container');
+    calendar = new FullCalendar.Calendar(calendarEl, {
+        // ... (calendar options)
+    });
+    calendar.render();
+}
+
+    // Calendar script
+    document.addEventListener('DOMContentLoaded', function() {
+  var calendarEl = document.getElementById('calendar-container');
+  var jobDetailsEl = document.getElementById('job-details');
+
+  var jobEvents = [
+    { title: 'Cook', start: '2024-09-02', jobId: 1, time: '09:00 AM' },
+    { title: 'Barber', start: '2024-09-10', jobId: 2, time: '02:00 PM' },
+    { title: 'Cloth washer', start: '2024-09-15', jobId: 3, time: '10:30 AM' },
+    { title: 'Gardener', start: '2024-09-20', jobId: 4, time: '11:00 AM' },
+    { title: 'Mechanic', start: '2024-09-25', jobId: 5, time: '03:30 PM' }
+  ];
+
+  var jobDetails = {
+    1: "To cook a family of five delicious and finger licking Amala, Egusi and pepper soup. With bush meat",
+    2: "Scheduled for a home service to give clean fades to two twins and their father",
+    3: "Scheduled to wash five Agada, five suits and 3 sneakers",
+    4: "Scheduled to neatly take care of a garden the span of one hectare of land",
+    5: "To fix faulty engine of a Mercedes Amg car"
+  };
+
+  var calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: '2024-09-01',
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,timeGridWeek,listWeek'
+    },
+    events: jobEvents,
+    eventClick: function(info) {
+      var jobId = info.event.extendedProps.jobId;
+      var jobTime = info.event.extendedProps.time;
+      fetch('https://randomuser.me/api/')
+        .then(response => response.json())
+        .then(data => {
+          var avatarUrl = data.results[0].picture.medium;
+          jobDetailsEl.innerHTML = `
+            <div class="job-item">
+              <img src="${avatarUrl}" alt="Avatar" class="job-avatar w-12 h-12 rounded-full mr-4">
+              <div class="job-info flex-grow">
+                <div class="job-title text-lg font-semibold">${info.event.title}</div>
+                <div class="job-description text-sm text-gray-600 mt-1">${jobDetails[jobId]}</div>
+                <div class="job-time text-sm text-blue-600 mt-2">${jobTime}</div>
+              </div>
+            </div>
+          `;
+        });
+    },
+    dayCellContent: function(arg) {
+      var date = arg.date;
+      var hasEvent = jobEvents.some(event => new Date(event.start).toDateString() === date.toDateString());
+      if (!hasEvent) {
+        return {
+          html: `
+            <div>${arg.dayNumberText}</div>
+            <div class="text-xs text-gray-500">No job schedule</div>
+          `
+        };
+      }
+      return arg.dayNumberText;
+    }
+  });
+
+  calendar.render();
+});
+    
+    
+    //For bottom navigation 
+   function updateIconsAndRedirect(buttonId, redirectUrl) {
+     const button = document.getElementById(buttonId);
+     const icon = button.querySelector('i');
+     const label = button.querySelector('span');
+
+     button.addEventListener('click', () => {
+       window.location.href = redirectUrl;
+     });
+
+     // Check if we're on the page corresponding to this button
+     const isActive = window.location.pathname.endsWith(redirectUrl);
+
+     // Update the icon and label color based on the current page
+     if (isActive) {
+       icon.classList.remove('text-gray-400');
+       icon.classList.add('text-blue-600');
+       label.classList.remove('text-gray-500', 'dark:text-gray-400');
+       label.classList.add('text-blue-600');
+     } else {
+       icon.classList.remove('text-blue-600');
+       icon.classList.add('text-gray-400');
+       label.classList.remove('text-blue-600');
+       label.classList.add('text-gray-500', 'dark:text-gray-400');
+     }
+   }
+
+   // Update icons and set up redirects for each button
+   updateIconsAndRedirect('jobsButton', 'jobs.html');
+   updateIconsAndRedirect('servicesButton', 'services.html');
+   updateIconsAndRedirect('appointmentButton', 'appointment.html');
+   updateIconsAndRedirect('profileButton', 'profile.html');
+   updateIconsAndRedirect('messageButton', 'message.html');
+</script>
+
+</body>
+</html>
