@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Job Description</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flowbite@1.6.5/dist/flowbite.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        .text-emerald-700 {
+            color: #03543F;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 16px;
+        }
+        .font-bold-custom {
+            font-weight: 700;
+        }
+        .font-normal-custom {
+            font-weight: 400;
+        }
+
+        .text-red-600 {
+            color: #E02424;
+        }
+        .text-2xl {
+            font-size: 1.5rem;
+        }
+        .text-gray-500 {
+            color: #737373;
+        }
+        .container {
+            width: 100%;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+        .navbar {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            z-index: 1000;
+            padding: 1rem;
+            border-bottom: 1px solid #e2e8f0;
+            width: 100%;
+            max-width: 480px;
+        }
+        .job-detail, .purchaser-profile {
+            width: 100%;
+            max-width: 480px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container bg-gray-white">
+        <div class="navbar flex justify-between items-center">
+            <button id="backToJobsBtn" class="bg-blue-500 text-white px-4 py-1 rounded flex items-center">
+                <i class="fas fa-times mr-2"></i>
+                Back to Jobs
+            </button>
+            <div class="flex items-center">
+                <i class="fas fa-share-alt mr-4 text-gray-500"></i>
+                <i class="fas fa-bell text-gray-500"></i>
+            </div>
+        </div>
+
+        <div class="flex flex-wrap mt-1">
+            <div class="job-detail p-6 border border-gray-100 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex justify-between items-center mb-2">
+                    <h6 class="text-gray-500 dark:text-gray-400">
+                        <span class="text-gray-500 text-sm">Time left:</span>
+                        <span id="countdown1" name="countdown1" class="font-bold text-red-600 text-lg"></span>
+                    </h6>
+                </div>
+                <div style="margin-top: 8px;">
+                    <h2 id="title1" name="title1" class="text-gray-800 mb-0 text-sm font-semibold dark:text-white">Amala and Egusi</h2>
+                </div>
+                <p id="description1" name="description1" class="text-gray-500 dark:text-gray-400 text-sm mb-4">i want 2 wraps of amala(adult size), Egusi soup and four big meats</p>
+                <div class="border-b border-gray-200 mb-4"></div>
+                <h4 class="text-base font-bold dark:text-white mb-2">Job details:</h4>
+                <div class="flex items-center mb-2">
+                    <span id="priceRange1" name="priceRange1" class="bg-emerald-100 text-emerald-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦4,000 - ₦5,500</span>
+                </div>
+                <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-2">
+                    <i class="fas fa-money-bill-wave mr-2"></i>
+                    <span id="paymentMethods1" name="paymentMethods1">Opay and Palmpay</span>
+                </div>
+                <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-2">
+                    <i class="bi bi-clock mr-2"></i>
+                    <span>10 mins ago</span>
+                </div>
+                <div class="border-b border-gray-200 mb-4"></div>
+                <h4 class="text-base font-bold dark:text-white mb-2">Location:</h4>
+                <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mb-2">
+                    <i class="fas fa-location-arrow mr-2"></i>
+                    <span id="location1" name="location1">Surulere</span>
+                </div>
+                <div class="border-b border-gray-200 mb-4"></div>
+                <h4 class="text-base font-bold dark:text-white mb-2">Bid details:</h4>
+                <div class="flex items-center text-gray-500 dark:text-gray-400 text-sm mt-2 mb-4">
+                    <i class="bi bi-people-fill mr-2"></i>
+                    <a href="bidderlist.html" class="text-gray-500 dark:text-gray-400 text-xs">
+                        <span id="bidders5" name="bidders5">6 bidders</span>
+                    </a>
+                    <i class="fa fa-check-circle text-gray-500 ml-4"></i>
+                    <span id="bidStatus5" name="bidStatus5" class="text-gray-500 dark:text-gray-400 text-xs ml-2">Bid not yet placed</span>
+                </div>
+                <div class="border-b border-gray-200 mb-4"></div>
+                <div class="mb-6"></div>
+                <div class="mb-6"></div>
+                <button type="button" class="px-6 py-3.5 text-base font-medium text-white inline-flex items-center justify-center bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 w-full mb-4">
+                    <i class="fa fa-gavel w-4 h-4 text-white me-2" aria-hidden="true"></i>
+                    Place bid
+                </button>
+                <button type="button" class="px-6 py-3.5 text-base font-medium text-gray-700 inline-flex items-center justify-center bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 w-full mb-4">
+                    <i class="fas fa-save mr-2"></i>
+                    Save Job
+                </button>
+                <button type="button" class="px-6 py-3.5 text-base font-medium text-gray-700 inline-flex items-center justify-center bg-gray-300 hover:bg-gray-400 focus:ring-4 focus:outline-none focus:ring-gray-300 rounded-lg text-center dark:bg-gray-600 dark:hover:bg-gray-700 dark:focus:ring-gray-800 w-full">
+                    <i class="fas fa-exclamation-triangle mr-2"></i>
+                    Report Job
+                </button>
+                <div class="mb-4"></div>
+            </div>
+            <div class="purchaser-profile p-6 border border-gray-100 rounded-lg dark:bg-gray-800 dark:border-gray-700">
+                <!-- Purchaser Profile Content Here -->
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <script>
+        // Countdown functionality
+        const countdownElements = [
+            { id: 'countdown1', timeLeft: 600 } // 10 minutes in seconds
+        ];
+
+        countdownElements.forEach(element => {
+            const countdownElement = document.getElementById(element.id);
+            let timeLeft = element.timeLeft;
+
+            function updateCountdown() {
+                const hours = Math.floor(timeLeft / 3600);
+                const minutes = Math.floor((timeLeft % 3600) / 60);
+                const seconds = timeLeft % 60;
+
+                countdownElement.innerHTML = `
+                    <span class="digital-7-font">${hours.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">hr</span>
+                    <span class="digital-7-font">${minutes.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">min</span>
+                    <span class="digital-7-font">${seconds.toString().padStart(2, '0')}</span><span class="text-sm text-gray-500">sec</span>
+                `;
+
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(countdownInterval);
+                    countdownElement.innerHTML = '<span class="digital-7-font">00</span><span class="font-normal-custom">hr</span><span class="digital-7-font">00</span><span class="font-normal-custom">min</span><span class="digital-7-font">00</span><span class="font-normal-custom">sec</span>';
+                }
+            }
+
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        });
+
+        // Back to Jobs button functionality
+        document.getElementById('backToJobsBtn').addEventListener('click', function() {
+            window.location.href = 'jobs.html';
+        });
+    </script>
+</body>
+</html>
