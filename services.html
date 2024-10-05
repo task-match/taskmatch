@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>services</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style>
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: white;
+        }
+        
+        @media (max-width: 767px) {
+            #default-sidebar {
+                width: 100%;
+                position: fixed;
+                top: 60px;
+                left: 0;
+                height: calc(100% - 60px);
+                z-index: 40;
+                overflow-y: auto;
+            }
+            #cancel-drawer {
+                display: block;
+                position: absolute;
+                top: 10px;
+                right: 10px;
+                cursor: pointer;
+            }
+            .main-container {
+                margin-top: 60px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            #cancel-drawer {
+                display: none;
+            }
+            .main-container {
+                width: 70%;
+                margin: 0 auto;
+                display: flex;
+            }
+            #default-sidebar {
+                width: 40%;
+                position: sticky;
+                top: 60px;
+                height: calc(100vh - 60px);
+                overflow-y: auto;
+            }
+            .right-container {
+                width: 60%;
+                overflow-y: auto;
+                max-height: calc(100vh - 60px);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-100">
+    <!-- Header Section -->
+    <nav class="sticky-header bg-white border-gray-200 px-3 py-3 dark:bg-gray-900 h-[60px]">
+        <div class="w-full flex flex-wrap justify-between items-center mx-auto">
+            <button id="filter-toggle" class="flex items-center border border-gray-400 text-blue-500 text-xs font-medium px-16 py-3 rounded hover:bg-blue-500 hover:text-white">
+                <i class="fas fa-filter mr-3"></i>
+                Filter
+            </button>
+            <button class="flex items-center border border-gray-400 text-blue-500 text-xs font-medium px-16 py-3 rounded hover:bg-blue-500 hover:text-white">
+                <i class="fas fa-sort mr-3"></i>
+                Sort
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="main-container flex flex-col md:flex-row">
+
+     <!-- Drawer -->
+     <aside id="default-sidebar" class="fixed md:static top-[60px] left-0 z-40 w-full md:w-[40%] bg-white dark:bg-gray-800 transition-transform -translate-x-full md:translate-x-0">
+        <!-- Cancel icon for mobile view -->
+        <div id="cancel-drawer" class="text-gray-500 hover:text-gray-700">
+          <i class="fas fa-times"></i>
+        </div>
+
+            <div class="h-full px-3 overflow-y-auto">
+                <h5 id="drawer-label" class="inline-flex items-center mt-2 mb-1 text-sm font-semibold text-gray-500 dark:text-gray-400">
+                    <svg class="w-4 h-4 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="""M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z"/>
+                    </svg>Job Categories
+                </h5>
+                <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">Check the boxes for the jobs you want so they can be displayed.</p>
+                <h3 class="text-sm font-semibold text-gray-900 dark:text-white">Filter Jobs</h3>
+                <ul class="space-y-2 mt-2">
+                    <li>
+                        <div class="flex items-center mb-2">
+                            <input id="category-cook" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="category-cook" class="ml-2 text-sm font-normal text-gray-700 dark:text-gray-300">Cook</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="flex items-center mb-2">
+                            <input id="category-errand" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                            <label for="category-errand" class="ml-2 text-sm font-normal text-gray-700 dark:text-gray-300">Errand</label>
+                        </div>
+                    </li>
+                    <!-- Add more categories as needed -->
+                </ul>
+                <div class="border-t border-gray-500 mt-4"></div>
+                <!-- Price Range -->
+                <div class="mt-4">
+                    <h5 id="drawer-label" class="inline-flex items-center mb-2 text-sm font-semibold text-gray-500 dark:text-gray-400"><i class="bi bi-currency-dollar text-gray-500 me-2"></i>Price Range</h5>
+                    <p class="mb-2 text-xs text-gray-500 dark:text-gray-400">Use the price range to filter your desired job pay.</p>
+                    <div class="form-group mb-4">
+                        <label for="minPrice" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Min Price:</label>
+                        <input type="number" id="minPrice" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter minimum price">
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="maxPrice" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Max Price:</label>
+                        <input type="number" id="maxPrice" class="block p-2 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Enter maximum price">
+                    </div>
+                    <div class="flex justify-between mt-10">
+                        <button id="confirm-button" class="text-white bg-blue-500 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-7 py-2 text-center">Confirm</button>
+                        <button id="cancel-button" class="text-white bg-red-500 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-7 py-2 text-center">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+         <!-- Right Container -->
+         <div class="right-container flex-1 md:w-[60%]">
+
+            <!-- Spotlight -->
+            <div class="w-full overflow-x-auto px-4 my-3 bg-white py-4 shadow-lg">
+                <div class="flex gap-2 overflow-x-auto">
+                    <div class="w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-1 px-7">
+                        <div class="flex flex-col items-center pt-2 pb-0">
+                            <img class="w-20 h-20 mb-2 rounded-full shadow-lg" src="https://flowbite.com/docs/images/people/profile-picture-4.jpg" alt="image1"/>
+                            <h5 class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Oluwa Green</h5>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Cook of the week</span>
+                            <div class="flex mt-4 md:mt-6">
+                                <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 whitespace-nowrap">Hire me</a>
+                            </div>
+                            <div class="flex flex-col items-center mt-4">
+                                <div class="flex items-center">
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                </div>
+                                <p class="ms-1 mt-1 text-xs text-gray-500 dark:text-gray-500">(745 reviews)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-1 px-7">
+                        <div class="flex flex-col items-center pt-2 pb-2">
+                            <img class="w-20 h-20 mb-2 rounded-full shadow-lg" src="https://flowbite.com/docs/images/people/profile-picture-5.jpg" alt="image2"/>
+                            <h5 class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Jane Doe</h5>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Baker of the week</span>
+                            <div class="flex mt-4 md:mt-6">
+                                <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 whitespace-nowrap">Hire me</a>
+                            </div>
+                            <div class="flex flex-col items-center mt-4">
+                                <div class="flex items-center">
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                </div>
+                                <p class="ms-1 mt-1 text-xs text-gray-500 dark:text-gray-500">(999 reviews)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-1 px-7">
+                        <div class="flex flex-col items-center pt-2 pb-2">
+                            <img class="w-20 h-20 mb-2 rounded-full shadow-lg" src="https://flowbite.com/docs/images/people/profile-picture-3.jpg" alt="image3"/>
+                            <h5 class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">John Smith</h5>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">Chef of the week</span>
+                            <div class="flex mt-4 md:mt-6">
+                                <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 whitespace-nowrap">Hire me</a>
+                            </div>
+                            <div class="flex flex-col items-center mt-4">
+                                <div class="flex items-center">
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                </div>
+                                <p class="ms-1 mt-1 text-xs text-gray-500 dark:text-gray-500">(123 reviews)</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-64 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-1 px-7">
+                        <div class="flex flex-col items-center pt-2 pb-2">
+                            <img class="w-20 h-20 mb-2 rounded-full shadow-lg" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="image4"/>
+                            <h5 class="mb-1 text-sm font-semibold text-gray-900 dark:text-white">Alice Wonda</h5>
+                            <span class="text-xs text-gray-500 dark:text-gray-400 whitespace-nowrap">cleaner of the week</span>
+                            <div class="flex mt-4 md:mt-6">
+                                <a href="#" class="py-2 px-4 ms-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 whitespace-nowrap">Hire me</a>
+                            </div>
+                            <div class="flex flex-col items-center mt-4">
+                                <div class="flex items-center">
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                </div>
+                                <p class="ms-1 mt-1 text-xs text-gray-500 dark:text-gray-500">(456 reviews)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+
+            <!-- job list-->
+            <div class="flex justify-center bg-white shadow-lg pt-2 pb-24">
+                <div class="grid grid-cols-1 gap-4">
+                    <!-- Duplicated job card 1 -->
+                    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700 mt-2">
+                        <div class="flex flex-col">
+                            <h5 id="description" name="description" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">Craving authentic Nigerian flavors? Let ME whip up your favorite local delicacies, from jollof rice to egusi soup!</h5>
+                            <div class="flex">
+                                <div class="flex-1">
+                                    <div class="flex flex-col items-start mb-2">
+                                        <div class="flex items-center">
+                                            <img class="w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Avatar">
+                                            <div class="ml-2 mt-4">
+                                                <span class="font-bold text-sm text-gray-700" id="username" name="username">Ahmed Ahmed</span>
+                                                <span class="block mt-[-3px] text-gray-400 text-xs">Cleaner of the week</span>
+                                                <div class="flex items-center mb-5">
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                                    <p class="ms-1 ml-2 text-xs text-gray-400 dark:text-gray-500">(395 reviews)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <span id="priceRange2" name="priceRange2" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦500 - ₦1,500</span>
+                                        <span id="paymentMethod2" name="paymentMethod2" class="bg-gray-100 text-gray-700 text-sm font-medium ml-auto px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Opay, Bank transfer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duplicated job card 2 -->
+                    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700 mt-4">
+                        <div class="flex flex-col">
+                            <h5 id="description" name="description" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">Craving authentic Nigerian flavors? Let ME whip up your favorite local delicacies, from jollof rice to egusi soup!</h5>
+                            <div class="flex">
+                                <div class="flex-1">
+                                    <div class="flex flex-col items-start mb-2">
+                                        <div class="flex items-center">
+                                            <img class="w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Avatar">
+                                            <div class="ml-2 mt-4">
+                                                <span class="font-bold text-sm text-gray-700" id="username" name="username">Ahmed Ahmed</span>
+                                                <span class="block mt-[-3px] text-gray-400 text-xs">Cleaner of the week</span>
+                                                <div class="flex items-center mb-5">
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                                    <p class="ms-1 ml-2 text-xs text-gray-400 dark:text-gray-500">(395 reviews)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <span id="priceRange2" name="priceRange2" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦500 - ₦1,500</span>
+                                        <span id="paymentMethod2" name="paymentMethod2" class="bg-gray-100 text-gray-700 text-sm font-medium ml-auto px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Opay, Bank transfer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Duplicated job card 3 -->
+                    <div class="max-w-sm pb-2 pt-2 pl-4 pr-4 border border-gray-300 rounded-lg bg-gray-000 dark:bg-gray-800 dark:border-gray-700 mt-4">
+                        <div class="flex flex-col">
+                            <h5 id="description" name="description" class="text-gray-700 dark:text-gray-400 text-base font-semibold mb-1">Craving authentic Nigerian flavors? Let ME whip up your favorite local delicacies, from jollof rice to egusi soup!</h5>
+                            <div class="flex">
+                                <div class="flex-1">
+                                    <div class="flex flex-col items-start mb-2">
+                                        <div class="flex items-center">
+                                            <img class="w-12 h-12 rounded-full" src="https://flowbite.com/docs/images/people/profile-picture-2.jpg" alt="Avatar">
+                                            <div class="ml-2 mt-4">
+                                                <span class="font-bold text-sm text-gray-700" id="username" name="username">Ahmed Ahmed</span>
+                                                <span class="block mt-[-3px] text-gray-400 text-xs">Cleaner of the week</span>
+                                                <div class="flex items-center mb-5">
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-yellow-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1"></i>
+                                                    <i class="fas text-xs fa-star text-gray-300 me-1 dark:text-gray-500"></i>
+                                                    <p class="ms-1 ml-2 text-xs text-gray-400 dark:text-gray-500">(395 reviews)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center mb-2">
+                                        <span id="priceRange2" name="priceRange2" class="bg-blue-100 text-blue-700 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">₦500 - ₦1,500</span>
+                                        <span id="paymentMethod2" name="paymentMethod2" class="bg-gray-100 text-gray-700 text-sm font-medium ml-auto px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">Opay, Bank transfer</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Bottom Navigation -->
+ <div class="fixed bottom-0 z-50 w-full -translate-x-1/2 bg-white border-t border-gray-200 left-1/2 dark:bg-gray-700 dark:border-gray-600">
+   <div class="grid h-full max-w-lg grid-cols-5 mx-auto">
+     <button data-tooltip-target="tooltip-jobs" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="jobsButton">
+       <i class="fa-solid fa-person-digging w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Jobs</span>
+     </button>
+     <div id="tooltip-jobs" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Jobs
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-services" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="servicesButton">
+       <i class="fa-solid fa-users w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Services</span>
+     </button>
+     <div id="tooltip-services" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Services
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-appointment" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="appointmentButton">
+       <i class="fa-solid fa-calendar-plus w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Appointment</span>
+     </button>
+     <div id="tooltip-appointment" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Appointment
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-profile" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="profileButton">
+       <i class="fa-solid fa-user w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Profile</span>
+     </button>
+     <div id="tooltip-profile" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Profile
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+     <button data-tooltip-target="tooltip-message" type="button" class="inline-flex flex-col items-center justify-center p-4 hover:bg-gray-50 dark:hover:bg-gray-800 group" id="messageButton">
+       <i class="fa-solid fa-message w-5 h-5 mb-1 text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500"></i>
+       <span class="text-xs text-gray-500 dark:text-gray-400 group-hover:text-blue-600 dark:group-hover:text-blue-500">Message</span>
+     </button>
+     <div id="tooltip-message" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+       Message
+       <div class="tooltip-arrow" data-popper-arrow></div>
+     </div>
+   </div>
+ </div>
+7
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+
+    <script>
+    const filterToggle = document.getElementById('filter-toggle');
+    const sidebar = document.getElementById('default-sidebar');
+    const cancelDrawer = document.getElementById('cancel-drawer');
+
+    filterToggle.addEventListener('click', () => {
+        sidebar.classList.toggle('-translate-x-full');
+        sidebar.classList.toggle('translate-x-0');
+    });
+
+    cancelDrawer.addEventListener('click', () => {
+        sidebar.classList.add('-translate-x-full');
+        sidebar.classList.remove('translate-x-0');
+    });
+    
+    
+    //For bottom navigation 
+   function updateIconsAndRedirect(buttonId, redirectUrl) {
+     const button = document.getElementById(buttonId);
+     const icon = button.querySelector('i');
+     const label = button.querySelector('span');
+
+     button.addEventListener('click', () => {
+       window.location.href = redirectUrl;
+     });
+
+     // Check if we're on the page corresponding to this button
+     const isActive = window.location.pathname.endsWith(redirectUrl);
+
+     // Update the icon and label color based on the current page
+     if (isActive) {
+       icon.classList.remove('text-gray-400');
+       icon.classList.add('text-blue-600');
+       label.classList.remove('text-gray-500', 'dark:text-gray-400');
+       label.classList.add('text-blue-600');
+     } else {
+       icon.classList.remove('text-blue-600');
+       icon.classList.add('text-gray-400');
+       label.classList.remove('text-blue-600');
+       label.classList.add('text-gray-500', 'dark:text-gray-400');
+     }
+   }
+
+   // Update icons and set up redirects for each button
+   updateIconsAndRedirect('jobsButton', 'jobs.html');
+   updateIconsAndRedirect('servicesButton', 'services.html');
+   updateIconsAndRedirect('appointmentButton', 'appointment.html');
+   updateIconsAndRedirect('profileButton', 'profile.html');
+   updateIconsAndRedirect('messageButton', 'message.html');
+    
+    </script>
+
+</body>
+  </html>
